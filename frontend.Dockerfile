@@ -6,4 +6,6 @@ RUN git clone https://github.com/HeinMinThant117/channels-frontend.git
 
 RUN cd channels-frontend; npm ci;
 
-CMD cd channels-frontend; npm start;
+RUN cd channels-frontend; npm run build;
+
+CMD cd channels-frontend; npm run dev -- --host;
