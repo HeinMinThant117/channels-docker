@@ -2,14 +2,14 @@ version: '3.8'
 
 services:
   channels_backend:
-    image: channels-backend
+    image: channels-backend:latest
     build: .
     ports:
       - 3000:3000
     volumes:
       - ./.env:/usr/src/app/channels-backend/.env
   channels_frontend:
-    image: channels-frontend
+    image: channels-frontend:latest
     depends_on:
       - channels_backend
     build: .
