@@ -1,2 +1,15 @@
-Docker setup for both backend and frontend of channels.
-Might move to a respective repos after setup is complete
+## Requirements
+- Docker
+
+## Installation
+1. Copy .env file
+```
+cp .env.example .env
+```
+2. Run docker-compose file
+```
+docker-compose up -d
+```
+
+
+
