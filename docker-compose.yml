@@ -17,3 +17,14 @@ services:
       - 5173:5173
     volumes:
       - ./.env.frontend:/usr/src/app/channels-frontend/.env
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    
+
+
