@@ -1,26 +1,6 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  channels_backend:
-    image: channels-backend
-    build:
-      context: .
-      dockerfile: ./backend.Dockerfile 
-    ports:
-      - 3000:3000
-    volumes:
-      - ./.env:/usr/src/app/channels-backend/.env
-  channels_frontend:
-    image: channels-frontend
-    depends_on:
-      - channels_backend
-    build:
-      context: .
-      dockerfile: ./frontend.Dockerfile 
-    ports:
-      - 5173:5173
-    volumes:
-      - ./.env:/usr/src/app/channels-frontend/.env
   mongo:
     image: mongo
     restart: always
@@ -29,6 +9,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
   mongo_express:
     image: mongo-express
     depends_on:
@@ -40,3 +22,25 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+  channels_backend:
+    image: channels-backend
+    depends_on:
+      - mongo
+    build:
+      context: .
+      dockerfile: ./backend.Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./.env:/usr/src/app/channels-backend/.env
+  channels_frontend:
+    image: channels-frontend
+    depends_on:
+      - channels_backend
+    build:
+      context: .
+      dockerfile: ./frontend.Dockerfile
+    ports:
+      - 5173:5173
+    volumes:
+      - ./.env:/usr/src/app/channels-frontend/.env
