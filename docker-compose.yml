@@ -2,17 +2,21 @@ version: '3.8'
 
 services:
   channels_backend:
-    image: channels-backend:latest
-    build: .
+    image: channels-backend
+    build:
+      context: .
+      dockerfile: ./backend.Dockerfile 
     ports:
       - 3000:3000
     volumes:
       - ./.env:/usr/src/app/channels-backend/.env
   channels_frontend:
-    image: channels-frontend:latest
+    image: channels-frontend
     depends_on:
       - channels_backend
-    build: .
+    build:
+      context: .
+      dockerfile: ./frontend.Dockerfile 
     ports:
       - 5173:5173
     volumes:
