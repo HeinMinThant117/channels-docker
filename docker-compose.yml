@@ -7,7 +7,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./.env.backend:/usr/src/app/channels-backend/.env
+      - ./.env:/usr/src/app/channels-backend/.env
   channels_frontend:
     image: channels-frontend
     depends_on:
@@ -16,7 +16,7 @@ services:
     ports:
       - 5173:5173
     volumes:
-      - ./.env.frontend:/usr/src/app/channels-frontend/.env
+      - ./.env:/usr/src/app/channels-frontend/.env
   mongo:
     image: mongo
     restart: always
@@ -36,7 +36,3 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
-      
-    
-
-
